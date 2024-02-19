@@ -1,3 +1,1 @@
-# template
-
-template to be used for new repositories
+building a binary search tree via Odin Project
