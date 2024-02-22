@@ -9,13 +9,19 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.right !== null) {
       prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
     }
-    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
     if (node.left !== null) {
       prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
 };
 
 const tree = new Tree(array);
-prettyPrint(tree.root);
 
-console.log(tree.root);
+
+tree.insert(100);
+tree.insert(1000);
+tree.insert(2);
+tree.insert(10);
+tree.insert(10000);
+tree.insert(325);
+prettyPrint(tree.root);

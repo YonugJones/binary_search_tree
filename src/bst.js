@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Node from "./nodeClass";
 
 export default class Tree{
@@ -19,5 +20,23 @@ export default class Tree{
         root.right = this.buildTree(array, mid + 1, end);
 
         return root;
+    }
+
+    insert(value) {
+        this.root = this.insertRec(this.root, value);
+    }
+
+    insertRec(node, value) {
+        if (node === null) {
+            return new Node(value);
+        }
+
+        if (value < node.value) {
+            node.left = this.insertRec(node.left, value);
+        } if (value > node.value) {
+            node.right = this.insertRec(node.right, value)
+        }
+
+        return node;
     }
 }
