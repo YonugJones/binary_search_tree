@@ -35,66 +35,36 @@ export default class Tree{
 
         return node;
     }
-    // insert(value) {
-    //     this.root = this.insertRec(this.root, value);
-    // }
 
-    // insertRec(node, value) {
-    //     if (node === null) {
-    //         return new Node(value);
-    //     }
+    delete(value, node = this.root) {
+        if (node === null) {
+            return null;
+        }
 
-    //     if (value < node.value) {
-    //         node.left = this.insertRec(node.left, value);
-    //     } if (value > node.value) {
-    //         node.right = this.insertRec(node.right, value)
-    //     }
+        if (value < node.value) {
+            node.left = this.delete(value, node.left);
+        } else if (value > node.value) {
+            node.right = this.delete(value, node.right);
+        } else {
+            if (node.left === null) {
+                return node.right;
+            } 
+            if (node.right === null) {
+                return node.left;
+            }
 
-    //     return node;
-    // }
+            node.value = this.minValue(node.right);
+            node.right = this.delete(node.value, node.right);
+        }
+        return node;
+    }
 
-    // delete(value) {
-    //     this.root = this.deleteRec(this.root, value)
-    // }
-
-    // deleteRec(node, value) {
-    //     // logic for non-existent node
-    //     if (node === null) {
-    //         return null;
-    //     }
-    //     // logic for comparing values
-    //     if (value < node.value) {
-    //         node.left = this.deleteRec(node.left, value);
-    //     } else if (value > node.value) {
-    //         node.right = this.deleteRec(node.right, value);
-    //     } else {
-    //         // logic for dealing with removal
-    //         // no children
-    //         if (node.left === null && node.right === null) {
-    //             return null;
-    //         }
-    //         // one child
-    //         if (node.left === null) {
-    //             return node.right;
-    //         }
-    //         if (node.right === null) {
-    //             return node.left
-    //         }
-
-    //         // two children
-    //         const successor = this.findMin(node.right);
-    //         node.value = successor.value;
-    //         node.right = this.deleteRec(node.right, successor.value);
-
-    //     }
-
-    //     return node;
-    // }
-
-    // findMin(node) {
-    //     while (node.left !== null) {
-    //         node = node.left;
-    //     }
-    //     return node;
-    // }
+    static minValue(node) {
+        let minValue = node.value;
+        while (node.left !== null) {
+            minValue = node.left.value;
+            node = node.left;
+        }
+        return minValue;
+    }
 }
