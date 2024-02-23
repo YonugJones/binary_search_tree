@@ -18,10 +18,15 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const tree = new Tree(array);
 
 
-tree.insert(100);
-tree.insert(1000);
-tree.insert(2);
-tree.insert(10);
-tree.insert(10000);
-tree.insert(325);
+// tree.insert(100);
+// tree.insert(1000);
+// tree.insert(2);
+// tree.insert(10);
+// tree.insert(10000);
+// tree.insert(325);
 prettyPrint(tree.root);
+
+// tree.delete(10000);
+// prettyPrint(tree.root);
+
+
