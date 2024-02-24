@@ -24,11 +24,11 @@ tree.insert(2);
 tree.insert(10);
 tree.insert(10000);
 tree.insert(325);
-prettyPrint(tree.root);
-
 tree.delete(10000);
 tree.delete(2);
 tree.delete(100);
 prettyPrint(tree.root);
-
-
+console.log(tree.inOrder());    
+console.log(tree.preOrder());    
+console.log(tree.postOrder());    
+console.log(tree.levelOrder());

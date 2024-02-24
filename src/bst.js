@@ -67,4 +67,93 @@ export default class Tree{
         }
         return minValue;
     }
+
+    find(value, node = this.root) {
+        if (node === null || node.value === value) {
+            return node;
+        }
+
+        if (value < node.value) return this.find(value, node.left);
+
+        return this.find(value, node.right);
+    }
+
+    // left node, root node, right node
+    inOrder(callback = null, currentNode = this.root) {
+        const result = [];
+        const traverse = (node) => {
+            if (node) {
+                traverse(node.left);
+                if (!callback) {
+                    result.push(node.value);
+                } else {
+                    callback(node.value);
+                }
+                traverse(node.right);
+            }
+        };
+        traverse(currentNode);
+        return result;
+    }
+
+    // root node, left node, right node
+    preOrder(callback = null, currentNode = this.root) {
+        const result = [];
+        const traverse = (node) => {
+            if (node) {
+                if (!callback) {
+                    result.push(node.value);
+                } else {
+                    callback(node.value);
+                }
+                traverse(node.left);
+                traverse(node.right)
+            }
+        }
+        traverse(currentNode);
+        return result;
+    }
+
+    // left node, right node, root node;
+    postOrder(callback = null, currentNode = this.root) {
+        const result = [];
+        const traverse = (node) => {
+            if (node) {
+                traverse(node.left);
+                traverse(node.right);
+                if (!callback) {
+                    result.push(node.value);
+                } else {
+                    callback(node.value);
+                }
+            }
+        };
+        traverse(currentNode);
+        return result;
+    }
+    
+    levelOrder(callback = null, currentNode = this.root) {
+        const result = [];
+        const queue = [];
+        if (currentNode) {
+            queue.push(currentNode);
+        }
+        while (queue.length > 0) {
+            const node = queue.shift();
+            if (!callback) {
+                result.push(node.value);
+            } else {
+                callback(node.value);
+            }
+            if (node.left) {
+                queue.push(node.left);
+            } 
+            if (node.right) {
+                queue.push(node.right);
+            }
+            
+        }
+        return result;
+    }
+    
 }
