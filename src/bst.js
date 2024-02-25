@@ -56,6 +56,7 @@ export default class Tree{
             node.value = this.minValue(node.right);
             node.right = this.delete(node.value, node.right);
         }
+
         return node;
     }
 
@@ -65,6 +66,7 @@ export default class Tree{
             minValue = node.left.value;
             node = node.left;
         }
+
         return minValue;
     }
 
@@ -72,7 +74,6 @@ export default class Tree{
         if (node === null || node.value === value) {
             return node;
         }
-
         if (value < node.value) return this.find(value, node.left);
 
         return this.find(value, node.right);
@@ -92,6 +93,7 @@ export default class Tree{
                 traverse(node.right);
             }
         };
+
         traverse(currentNode);
         return result;
     }
@@ -110,6 +112,7 @@ export default class Tree{
                 traverse(node.right)
             }
         }
+
         traverse(currentNode);
         return result;
     }
@@ -128,6 +131,7 @@ export default class Tree{
                 }
             }
         };
+
         traverse(currentNode);
         return result;
     }
@@ -150,10 +154,37 @@ export default class Tree{
             } 
             if (node.right) {
                 queue.push(node.right);
-            }
-            
+            }  
         }
+
         return result;
+    }
+    
+    height(node) {
+        if (node === null) {
+            return -1;
+        } 
+        const leftHeight = this.height(node.left);
+        const rightHeight = this.height(node.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    depth(node, currentNode = this.root, currentDepth = 0) {
+        if (currentNode === null) {
+            return -1;
+        }
+        if (node === currentNode.value) {
+            return currentDepth;
+        }
+    
+        const leftDepth = this.depth(node, currentNode.left, currentDepth + 1);
+        const rightDepth = this.depth(node, currentNode.right, currentDepth + 1);
+    
+        if (leftDepth !== -1 || rightDepth !== -1) {
+            return Math.max(leftDepth, rightDepth);
+        }
+    
+        return -1;
     }
     
 }
